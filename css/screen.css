@@ -94,7 +94,82 @@
 /*------------------------------------*\
 #GENERIC
 \*------------------------------------*/
+@media (prefers-color-scheme: dark) {
+	:root {
+		--global-html-color: White;
+		--global-html-backgroundColor: var(--global-color-neutral-xxxx-dark);
 
+		--global-label-color: var(--global-color-neutral-xx-light);
+		--global-placeholder-color: var(--global-color-neutral-dark);
+		--global-input-backgroundColor: var(--global-color-neutral-xxxx-dark);
+		--global-input-color: var(--global-color-neutral-xxxx-light);
+		--global-input-borderColor: var(--global-input-backgroundColor);
+		--global-input-hover-borderColor: var(--global-input-backgroundColor);
+		--global-input-focus-borderColor: var(--global-input-backgroundColor);
+		--global-input-focus-boxShadowColor: var(--global-color-alpha-transparent);
+		--global-input-error-borderColor: var(--global-input-backgroundColor);
+		--global-input-error-boxShadowColor: var(--global-color-error-transparent);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-logo {
+		--logo__path--1--fill: White;
+		--logo__path--2--fill: var(--logo__path--1--fill);
+		--logo__path--3--fill: var(--logo__path--1--fill);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-card {
+		--card-backgroundColor: var(--global-color-neutral-xxx-dark);
+		--card__footer-borderColor: var(--global-color-neutral-xxxx-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-button {
+		--button-borderColor: var(--global-color-alpha);
+		--button-hover-borderColor: var(--global-color-alpha-light);
+		--button-active-borderColor: var(--global-color-alpha-dark);
+		--button-focus-borderColor: var(--global-color-alpha-x-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-custom-toggle-list {
+		--toggle-list-borderColor: var(--global-color-neutral-xx-dark);
+	}
+
+	.c-custom-toggle {
+		--toggle-backgroundColor: var(--global-input-backgroundColor);
+		--toggle-checked-borderColor: var(--toggle-checked-backgroundColor);
+		--toggle-focus-boxShadow: 0 0 0 1px var(--global-color-neutral-xxxx-dark),
+			var(--global-input-focus-boxShadowSpread)
+				var(--global-input-focus-boxShadowColor);
+		--toggle__switch-backgroundColor: var(--global-color-neutral-dark);
+		--toggle__switch-checked-backgroundColor: White;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.c-password-toggle {
+		--password-toggle__symbol-fill: var(--global-color-neutral-x-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-tent {
+		--tent-backgroundColor: var(--global-color-neutral-xxx-dark);
+		--tent__content-color: var(--global-color-neutral-light);
+		--tent__icon-backgroundColor: var(--global-color-neutral-xxx-dark);
+		--tent__icon-backgroundColor: var(--global-color-alpha-light);
+		--tent__action-backgroundColor: var(--global-color-neutral-xx-dark);
+		/* --tent__action-color: white; */
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.c-icon {
+		--icon__path-color-1: var(--global-color-alpha-dark);
+		--icon__path-color-2: white;
+	}
+}
 /*
     Generic: Page
     ---
@@ -583,11 +658,19 @@ input::placeholder {
 	--card-backgroundColor: White;
 	--card__footer-borderColor: var(--global-color-neutral-xxx-light);
 	--card-borderRadius: var(--global-borderRadius);
+	--label-backgroundColor: var(--global-input-backgroundColor);
+	--label-boxShadow-color: var(--global-input-backgroundColor);
 	background-color: var(--card-backgroundColor);
 	margin-bottom: var(--global-whitespace);
 	border-radius: var(--card-borderRadius);
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.075);
 	overflow: hidden;
+}
+@media (prefers-color-scheme: dark) {
+	.c-card {
+		--card-backgroundColor: var(--global-color-neutral-dark);
+		--card__footer-borderColor: var(--global-color-neutral-dark);
+	}
 }
 
 /* Add padding to child for more flexibility */
@@ -648,7 +731,7 @@ input::placeholder {
 	/* border: 1px solid var(--global-color-neutral-xxx-light); */
 	border-radius: var(--global-borderRadius);
 	background-color: var(--global-input-backgroundColor);
-	color: var(--label-color, var(--global-color-neutral-xx-dark));
+	color: var(--global-input-color);
 	font-family: inherit;
 	font-size: 16px;
 	line-height: calc(var(--global-baseline) * 3);
@@ -725,9 +808,14 @@ more padding on the right to avoid overlap
 	will-change: transform;
 	transform: translateY(0);
 	transition: transform 200ms ease-in-out;
-	box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
-	background: white;
-	top: 36px;
+	box-shadow: 0 0 4px 4px var(--label-boxShadow-color);
+	background: var(--label-backgroundColor);
+	top: 60px;
+}
+
+.c-form-field:focus-within .c-label {
+	transform: translateY(-24px);
+	box-shadow: 0 0 2px 2px var(--label-boxShadow-color);
 }
 .c-floating-password {
 	position: absolute;
@@ -737,18 +825,27 @@ more padding on the right to avoid overlap
 	will-change: transform;
 	transform: translateY(0);
 	transition: transform 200ms ease-in-out;
-	box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
-	background: white;
-	top: 60px;
+	box-shadow: 0 0 4px 4px var(--input-boxShadow);
+	background: var(--label-backgroundColor);
+	top: 84px;
 }
 
 .c-label--option {
 	padding-bottom: 0;
 }
 .c-form-field:focus-within .c-label-floating {
-	transform: translateY(-16px);
-	box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.8);
+	transform: translateY(-24px);
+	box-shadow: 0 0 2px 2px var(--label-boxShadow);
 }
+.c-form-field .c-label-floating {
+	transform: translateY(-24px);
+	box-shadow: 0 0 2px 2px var(--label-boxShadow);
+}
+
+.c-form-field.has-error .c-input {
+	border: 1px solid var(--global-color-error);
+}
+
 /*
     Component: Button
     ---
@@ -1489,5 +1586,76 @@ No media query since this is the default in mobile first design
 	h2,
 	h3 {
 		page-break-after: avoid;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--global-page-color: White;
+		--global-page-backgroundColor: var(--global-color-neutral-xxxx-dark);
+
+		--global-label-color: var(--global-color-neutral-xx-light);
+		--global-placeholder-color: var(--global-color-neutral-dark);
+		--global-input-backgroundColor: var(--global-color-neutral-xxxx-dark);
+		--global-input-color: var(--global-color-neutral-xxxx-light);
+		--global-input-borderColor: var(--global-input-backgroundColor);
+		--global-input-hover-borderColor: var(--global-input-backgroundColor);
+		--global-input-focus-borderColor: var(--global-input-backgroundColor);
+		--global-input-focus-boxShadowColor: var(--global-color-alpha-transparent);
+		--global-input-error-borderColor: var(--global-input-backgroundColor);
+		--global-input-error-boxShadowColor: var(--global-color-error-transparent);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-logo {
+		--logo__path--1--fill: White;
+		--logo__path--2--fill: var(--logo__path--1--fill);
+		--logo__path--3--fill: var(--logo__path--1--fill);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-card {
+		--card-backgroundColor: var(--global-color-neutral-xxx-dark);
+		--card__footer-borderColor: var(--global-color-neutral-xxxx-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-button {
+		--button-borderColor: var(--global-color-alpha);
+		--button-hover-borderColor: var(--global-color-alpha-light);
+		--button-active-borderColor: var(--global-color-alpha-dark);
+		--button-focus-borderColor: var(--global-color-alpha-x-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-custom-toggle-list {
+		--toggle-list-borderColor: var(--global-color-neutral-xx-dark);
+	}
+
+	.c-custom-toggle {
+		--toggle-backgroundColor: var(--global-input-backgroundColor);
+		--toggle-checked-borderColor: var(--toggle-checked-backgroundColor);
+		--toggle-focus-boxShadow: 0 0 0 1px var(--global-color-neutral-xxxx-dark),
+			var(--global-input-focus-boxShadowSpread)
+				var(--global-input-focus-boxShadowColor);
+		--toggle__switch-backgroundColor: var(--global-color-neutral-dark);
+		--toggle__switch-checked-backgroundColor: White;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.c-password-toggle {
+		--password-toggle__symbol-fill: var(--global-color-neutral-x-dark);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	.c-input {
+		--label-color: var(--global-label-color);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.c-icon {
+		--icon__path-color-1: var(--global-color-alpha-dark);
+		--icon__path-color-2: white;
 	}
 }

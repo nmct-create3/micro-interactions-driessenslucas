@@ -11,18 +11,19 @@ let email = {},
 	signInButton;
 
 function handleFloatingLabel() {
-	emailField.addEventListener('keydown', function () {
-		if (!isEmpty(emailField.value)) {
+	emailField.addEventListener('blur', function () {
+		console.log(isEmpty(emailField.value));
+		if (isEmpty(emailField.value) == false) {
 			document
 				.querySelector('.c-floating-email')
 				.classList.add('c-label-floating');
-		} else {
+		} else if (isEmpty(emailField.value) == true) {
 			document
 				.querySelector('.c-floating-email')
 				.classList.remove('c-label-floating');
 		}
 	});
-	passwordInput.addEventListener('keydown', function () {
+	passwordInput.addEventListener('blur', function () {
 		if (!isEmpty(passwordInput.value)) {
 			document
 				.querySelector('.c-floating-password')
@@ -48,7 +49,11 @@ const isValidPassword = function (password) {
 };
 
 const isEmpty = function (fieldValue) {
-	return !fieldValue || !fieldValue.length;
+	if (fieldValue === '') {
+		return true;
+	} else {
+		return false;
+	}
 };
 
 function addErorClass(element) {
@@ -78,8 +83,8 @@ function enableListeners() {
 	emailField.addEventListener('blur', (event) => {
 		event.target.style.background = '';
 		if (
-			!isValidEmailAddress(event.target.value) ||
-			isEmpty(event.target.value)
+			!isValidEmailAddress(event.target.value) &&
+			!isEmpty(event.target.value)
 		) {
 			addErorClass(document.querySelector('.c-form-field-email'));
 			emailField.addEventListener('keydown', (event) => {
@@ -114,6 +119,9 @@ function enableListeners() {
 			console.log('password: ' + passwordInput.value);
 		} else {
 			console.log('error');
+			emailField.invalid = true;
+			addErorClass(document.querySelector('.c-form-field-email'));
+			addErorClass(document.querySelector('.c-form-field-password'));
 		}
 	});
 }
